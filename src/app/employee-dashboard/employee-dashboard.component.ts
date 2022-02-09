@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { EmployeeModel } from './employee-dashboard.model';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -9,8 +11,10 @@ import { EmailValidator, FormBuilder, FormGroup } from '@angular/forms';
 export class EmployeeDashboardComponent implements OnInit {
 
   formValue !: FormGroup;
+  employeeModelObj : EmployeeModel = new EmployeeModel();
+  employeeData !: any;
 
-  constructor(private formbuilder: FormBuilder) { }
+  constructor(private formbuilder: FormBuilder, private api : ApiService) { }
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
@@ -20,6 +24,52 @@ export class EmployeeDashboardComponent implements OnInit {
       phone : [''],
       salary : ['']
     })
+
+    this.getAllEmployees();
+  }
+
+  postEmployeeDetails(){
+    this.employeeModelObj.firstName = this.formValue.value.firstName;
+    this.employeeModelObj.lastName = this.formValue.value.lastName;
+    this.employeeModelObj.email = this.formValue.value.email;
+    this.employeeModelObj.phone = this.formValue.value.phone;
+    this.employeeModelObj.salary = this.formValue.value.salary;
+
+    this.api.postEmployee(this.employeeModelObj)
+    .subscribe(res=>{
+      console.log(res);
+      alert("Employee Added Succesfully")
+      let ref = document.getElementById('cancel')
+      ref?.click();
+      this.formValue.reset();
+      this.getAllEmployees();
+    },
+    err=>{
+      alert("Something went wrong");
+    })
+  }
+
+  getAllEmployees(){
+    this.api.getEmployees()
+    .subscribe(res => {
+      this.employeeData = res;
+    })
+  }
+
+  deleteEmployee(row : any) {
+    this.api.deleteEmployee(row.id)
+    .subscribe(res=> {
+      alert("Employee Deleted");
+      this.getAllEmployees();
+    })
+  }
+
+  onEdit(row : any) {
+    this.formValue.controls['firstName'].setValue(row.firstName);
+    this.formValue.controls['lastName'].setValue(row.lastName);
+    this.formValue.controls['email'].setValue(row.email);
+    this.formValue.controls['phone'].setValue(row.phone);
+    this.formValue.controls['salary'].setValue(row.salary);
   }
 
 }

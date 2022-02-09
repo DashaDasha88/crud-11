@@ -1,19 +1,12 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": 3,
+      "firstName": "Joe",
+      "lastName": "Mama",
+      "email": "joe@joe.com",
+      "phone": "2222222",
+      "salary": "$100,000"
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

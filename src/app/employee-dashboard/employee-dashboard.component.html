@@ -22,16 +22,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>Joe</td>
-      <td>Mama</td>
-      <td>joemama@mail.com</td>
-      <td>9191919191</td>
-      <td>$50, 000</td>
+    <tr *ngFor="let row of employeeData">
+      <td>{{row.id}}</td>
+      <td>{{row.firstName}}</td>
+      <td>{{row.lastName}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.phone}}</td>
+      <td>{{row.salary}}</td>
       <td>
-        <button class="btn btn-info">Edit</button>
-        <button class="btn btn-danger mx-3">Delete</button>
+        <button (click)="onEdit(row)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+        <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -76,7 +76,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Add</button>
+        <button type="button" (click)="postEmployeeDetails()" class="btn btn-primary">Add</button>
       </div>
     </div>
   </div>

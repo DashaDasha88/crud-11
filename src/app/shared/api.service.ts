@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
 
-  private apiURL = 'http://localhost:3000/posts'
+  private apiURL = 'http://localhost:3000/posts';
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class ApiService {
     }))
   }
 
-  getEmployee() {
+  getEmployees() {
     return this.http.get<any>(this.apiURL)
     .pipe(map((res: any) => {
       return res;
