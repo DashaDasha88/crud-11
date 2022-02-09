@@ -7,6 +7,14 @@
       "email": "joe@joe.com",
       "phone": "2222222",
       "salary": "$100,000"
+    },
+    {
+      "id": 4,
+      "firstName": "Bob",
+      "lastName": "Jones",
+      "email": "bob@bob.com",
+      "phone": "22222222",
+      "salary": "2222222"
     }
   ]
 }
