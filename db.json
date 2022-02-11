@@ -17,8 +17,13 @@
       "salary": "2222222"
     }
   ],
-
   "signupUsers": [
-
+    {
+      "fullName": "Jim Jimm",
+      "email": "jim@jim.com",
+      "password": "jim",
+      "phone": 11111111,
+      "id": 1
+    }
   ]
 }
